@@ -12,10 +12,15 @@ namespace techtasticfunctions
     public static class ImageAnalysis
     {
         [FunctionName("ImageAnalysis")]
-        public static async Task Run([BlobTrigger("images/{name}", Connection = "techtasticstorage")]
-        CloudBlockBlob myBlob, string name, TraceWriter log,
-        [CosmosDB("welcometotechtastic", "ttimagesanalysis", ConnectionStringSetting = "ttdb")]
-        IAsyncCollector<FaceAnalysisResults> result)
+        public static async Task Run(
+            [BlobTrigger("images/{name}", Connection = "techtasticstorage")]
+            CloudBlockBlob myBlob, 
+            
+            string name, 
+            TraceWriter log,
+
+            [CosmosDB("welcometotechtastic", "ttimagesanalysis", ConnectionStringSetting = "ttdb")]
+            IAsyncCollector<FaceAnalysisResults> result)
         {
             log.Info($"C# Blob trigger function Processed blob\n Name:{myBlob.Name} \n Size: {myBlob.Properties.Length} Bytes");
 
